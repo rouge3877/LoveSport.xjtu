@@ -1,0 +1,22 @@
+# for enveronment
+.vscode/
+.venv/
+
+# for python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# for data
+*.csv
+
+# for image
+.false_content/
+*.png
+*.jpg
+
+# for log
+*.log
+
+# for config
+lsp.config

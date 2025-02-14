@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
+	西安交通大学支付服务
+</title><link rel="stylesheet" type="text/css" href="/themes/default/style.css" />
+
+<script type="text/javascript" src="/scripts/jquery-3.3.1.min.js?id=1.0.0.2"></script>
+
+<script type="text/javascript" src="/scripts/plugins/jquery.easyui.min.js?id=1.0.0.2"></script>
+
+<script type="text/javascript" src="/scripts/lang/easyui-lang-zh_CN.js?id=1.0.0.2"></script>
+<script src="/Scripts/chinesealert.js?id=1.0.0.2" type="text/javascript"></script>
+
+<script src="/Scripts/common/common.js?id=1.0.0.2" type="text/javascript"></script>
+<script src="/Scripts/Jquery.MaskLayer.js?id=1.0.0.2" type="text/javascript"></script>
+<script src="/Scripts/jquery-powerFloat-min.js?id=1.0.0.2" type="text/javascript"></script>
+<script src="/Scripts/jquery.qrcode.min.js?id=1.0.0.2" type="text/javascript"></script>
+<!--[if lt ie 9]>
+    <script type="text/javascript" src="/scripts/plugins/html5.min.js"></script>
+<![endif]-->
+
+<style type="text/css">
+     .obj{
+	outline:none;
+	line-height:29px;
+	padding:10px;
+	padding-bottom:0;
+	height:29px;
+
+    border-radius: 5px;
+ }
+@-moz-document url-prefix() {
+   .obj{
+	outline:none;
+	line-height:40px;
+	padding:10px;
+	height:40px;
+    width: 170px;
+ }
+}
+@media all and (-ms-high-contrast:none){
+  .obj{
+	outline:none;
+	line-height:29px;
+	padding:10px;
+	padding-bottom:0;
+	height:29px;
+    width: 150px;
+ }
+}
+ </style>
+    <script type="text/javascript">
+        $(function() {
+            var isjypwd=0
+            $("#sporder").text(C100016 + "：");
+            $("#dtaccount").text(C100024 + "：");
+            if(isjypwd=="1"){
+                $("#dlpass").text(C100025 + "：");
+            }
+            else if(isjypwd=="0"){
+                $("#dlpass").text(C100142 + "：");
+            }
+            $("#qrbtn").text(C100026);
+            $("#spzfje").text(C100038 + "：");
+            $("#spyuan").text(C100037);
+            $("#dt1").text(C100042 + "：");
+            $("#btnsphone").text(C100039);
+            $("#btnzh").text(C100040);
+            $("#divsys").text(C100041);
+            $("#dtname").text(C100118 + "：");
+            $("#password").powerFloat({
+                offsets: { x: 230, y: -60 },
+                zIndex: 99999999,
+                position: "3-2",
+                eventType: 'click',
+                edgeAdjust: true
+            });
+
+
+            //$("button").each(function(i, k) {
+            //    $(k).attr("type", "button");
+            //});
+
+            $("#qrbtn").click(function() {
+                // $("#form1").attr("action", "/Pay/SynCardSub");
+                var rsapass = GetRSAStr("UnionControl", "");
+                if (rsapass != undefined && rsapass.length > 0) {
+                    $("#password").val(rsapass);
+                }
+                $("#txtacctype").val($("input[type='radio']:checked").val());
+                loading();
+                $("#form1").submit();
+            });
+            var ordermoney = 9.999;
+            $.each($("input[type='radio']"), function(i, k) {
+                if (ordermoney <= $(k).attr("tag")) {
+                    $(k).attr("checked", "checked");
+                    return false;
+                }
+            });
+
+        });
+        
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var isky = '0';
+          
+            if (isky == "1") {
+                checkInstall("UnionControl");
+            }
+        });
+    </script>
+</head>
+<body>
+<div class="wrapbox  cashier-page">
+    <!-- Header -->
+    
+<script type="text/javascript">
+    function goHref(type) {
+        //  window.location.href = "/Account/GetEnglish?type=" + type + "&url=" + window.location.href;
+        AjaxPost(AjaxHandlerUrl + 'Home/GetEnglish?type=' + type, {}, function (result) {
+            if (result.IsSucceed) {
+                closeloading();
+                //history.go(0);
+                location.reload(true);
+            }
+        });
+    }
+    $(function () {
+        $("#sphello").text(C100106);
+    });
+</script>
+<style>
+    .logo1{
+        float: left;display: inline-block;position: absolute;top: 14px;
+    }
+    .header-titile {
+        width: 70%;
+        display: inline-block;
+        height: 80px;
+        line-height: 80px;
+        text-align: center;
+        font-size: 30px;
+    }
+</style>
+<div class="toprow">
+    
+    <div class="box">
+        <ul>
+            
+            <li style="display: none;" class="has-children" id="liname"><span id="sphello"></span>，<a id="atxtname">
+                    
+            </a>
+            </li>
+            
+            <li class="has-children"><a onclick="goHref('chinese')">简体中文<img class="icon ico-arrowdown"
+                alt="" src="/themes/default/images/blank.gif" /></a>
+                <div class="dropdown-box language-li">
+                    <a onclick="goHref('english')">English</a>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+<header id="header">
+	<div class="box">
+            
+	        <div class="logo" ><a title=""><img src="/titleimages/logo.png" alt="支付平台" /></a></div>
+          
+	    
+        
+	</div>
+</header>
+    <!-- #Off -->
+    <!-- Nav -->
+    
+<nav id="nav">
+    <div class="box">
+        <ul>
+            
+        </ul>
+    </div>
+</nav>
+    <!-- #Off Nav -->
+    <form action="/Pay/CommonPcPay" id="form1" method="POST">
+        <input type="hidden" name="inputStr" value="2436859107" />
+        <input type="hidden" name="orderid" value="P2025021221284417327611000694" />
+        <input type="hidden" name="payid" value="4" />
+        <input type="hidden" id="txtacctype" name="acctype" value="" />
+        <input type="hidden" name="paytype" value="SynAccType" />
+        <div id="content">
+            <div id="mainbox">
+                <br />
+                <br />
+                <div class="order-number font_14">
+                    <span id="sporder"></span><span class="font_14 ordertext">
+                        P2025021221284417327611000694</span><span style="padding-left: 120px"><span id="spzfje"></span><big
+                                                                                                                      class="orange font_24"><strong>9.999</strong></big> <span
+                                                                                                                                                                                                       id="spyuan"></span></span>
+                </div>
+                <div class="setup-panel" id="aaa">
+                    
+                    <div class="other-pay" style="margin-left: 50px;">
+                        <br>
+                        <h3 class="setup-panel-head">
+                            <!-- <img class="icon ico-24 ico-checked" src="themes/default/images/blank.gif" /> -->
+                            <img src="/paymentimages/e_card.png" style="vertical-align: middle;" />
+                            <!-- <a class="link-more" href="pay.html?d=paymethod">其他支付方式</a> -->
+                        </h3>
+                        <dl class="payt">
+                            <dt class="label" id="dtaccount"></dt>
+                            <dd class="font_16" style="padding-top: 15px;">
+                                327611</dd>
+                        </dl>
+                        <dl class="payt">
+                            <dt class="label" id="dtname"></dt>
+                            <dd class="font_16" style="padding-top: 15px;">
+                                李雨轩</dd>
+                        </dl>
+                        <dl class="payt">
+                            <dt class="label" id="dt1"></dt>
+                            <dd class="font_16" style="padding-top: 15px;">
+                                
+                                    <label>
+                                        <input type="radio" value="000" tag="77.59"
+                                               name="rdoacctype" />电子账户(电子钱包)（余额77.59）</label>
+                                
+                            </dd>
+                        </dl>
+                        <dl class="payt" style="margin-top: 20px;">
+                            <dt class="label" id="dlpass"></dt>
+                            <dd>
+                                
+                                    <input type="password" class="textinput" id="password" name="passwd" required="true"
+                                           rel="keybox" readonly="readonly" maxlength="6" style="width: 150px; font-size: 18px;" />
+                                
+                            </dd>
+                        </dl>
+                        <br>
+                        <div class="action-button pay-next" style="padding-left: 126px;">
+                            <div>
+                                <button type="button" id="qrbtn" class="next-button-max">
+                                </button>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                </div>
+
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+    </form>
+    <!-- 校园卡登录 End -->
+    <div id="keybox" style="background-color: #fff; border: 1px solid #BEBEBE; display: none;">
+        <table cellpadding='0' cellspacing="2">
+            <tr><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(0)" class="key-button key-2"/></td><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(1)" class="key-button key-4"/></td><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(2)" class="key-button key-3"/></td><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(3)" class="key-button key-6"/></td><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(4)" class="key-button key-8"/></td><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(10)" class="key-button key-10"/></td></tr><tr><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(5)" class="key-button key-5"/></td><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(6)" class="key-button key-9"/></td><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(7)" class="key-button key-1"/></td><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(8)" class="key-button key-0"/></td><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(9)" class="key-button key-7"/></td><td><input type="image" src="/themes/default/images/blank.gif" onclick="showNum(11)" class="key-button key-11"/></td></tr>
+        </table>
+    </div>
+    <input type="hidden" id="txtpksm" value="8722539877621BA5AEE94B81A58C7775715E0914045B48B2D905051875E7DF6A075702C7670B529592AE7AE1D746108C68E05C072E619F84ADD3F75A7399551D" />
+    <!-- 支付确认#Off -->
+    <!--copyright-->
+    
+<footer id="footer">
+    <div class='box'>
+        <dl>
+            <dt>支付平台Copyright&copy; 2017 哈尔滨新中新电子股份有限公司，All Rights Reserved</dt>
+        </dl>
+    </div>
+</footer>
+
+</div>
+</body>
+</html>
